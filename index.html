@@ -17,6 +17,27 @@
 <meta property="og:description" content="Painted stones slide on a frozen lake at dusk. A knock stops your stone and sends the last of the line sliding on. 100 sheets for iPhone.">
 <meta property="og:url" content="https://nguyenvanlamm.github.io/clackmere-site/">
 <meta property="og:image" content="https://nguyenvanlamm.github.io/clackmere-site/assets/game.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="780">
+<meta property="og:image:height" content="1688">
+<meta property="og:image:alt" content="A sheet on Mirror Pond: painted stones on lilac ice inside a snowbank, a par disc at the top right, Undo and Scout pebbles below">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clackmere: flick a stone, watch the motion pass on">
+<meta name="twitter:description" content="Painted stones slide on a frozen lake at dusk. A knock stops your stone and sends the last of the line sliding on. 100 sheets for iPhone.">
+<meta name="twitter:image" content="https://nguyenvanlamm.github.io/clackmere-site/assets/game.webp">
+<meta name="twitter:image:alt" content="A sheet on Mirror Pond: painted stones on lilac ice inside a snowbank, a par disc at the top right, Undo and Scout pebbles below">
+<link rel="alternate" type="text/plain" title="llms.txt" href="llms.txt">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":["VideoGame","MobileApplication"],"@id":"https://nguyenvanlamm.github.io/clackmere-site/#game","name":"Clackmere","url":"https://nguyenvanlamm.github.io/clackmere-site/","description":"A calm stone-sliding puzzle for iPhone. Painted stones slide across a frozen lake at dusk; hit a line and your stone stops dead while the last one slides on. Bring every stone home to its own ring. 100 sheets on five lakes, every one solved by the game's own solver. Plays offline; no ads, no timers, no accounts. Coming soon to the App Store.","creativeWorkStatus":"Upcoming","genre":["Puzzle","Casual"],"gamePlatform":"iPhone","operatingSystem":"iOS","applicationCategory":"GameApplication","applicationSubCategory":"Puzzle","inLanguage":"en","playMode":"SinglePlayer","numberOfPlayers":{"@type":"QuantitativeValue","value":1},"image":"https://nguyenvanlamm.github.io/clackmere-site/assets/icon.webp","screenshot":["https://nguyenvanlamm.github.io/clackmere-site/assets/game.webp","https://nguyenvanlamm.github.io/clackmere-site/assets/home.webp","https://nguyenvanlamm.github.io/clackmere-site/assets/won.webp"],"author":{"@type":"Person","name":"Luong Nguyen"},"publisher":{"@type":"Person","name":"Luong Nguyen"}},
+{"@type":"WebSite","@id":"https://nguyenvanlamm.github.io/clackmere-site/#site","name":"Clackmere","url":"https://nguyenvanlamm.github.io/clackmere-site/","inLanguage":"en","about":{"@id":"https://nguyenvanlamm.github.io/clackmere-site/#game"},"publisher":{"@type":"Person","name":"Luong Nguyen"}},
+{"@type":"FAQPage","@id":"https://nguyenvanlamm.github.io/clackmere-site/#faq","mainEntity":[
+{"@type":"Question","name":"Does it need a connection?","acceptedAnswer":{"@type":"Answer","text":"No. Clackmere plays fully offline; the store is only asked when you open the shop or restore a purchase."}},
+{"@type":"Question","name":"Are there ads, or anything that tracks me?","acceptedAnswer":{"@type":"Answer","text":"No ads, no analytics, no accounts. Your progress stays on your iPhone. See the privacy policy."}},
+{"@type":"Question","name":"What if I get stuck?","acceptedAnswer":{"@type":"Answer","text":"Undo and Restart are free. Scout shows the next flick of a best line, or how many flicks to undo. You start with three Scouts and earn more on sheets 5, 10, 15 and 20 of each lake; they are never sold. Using one caps that sheet at two stars."}},
+{"@type":"Question","name":"I bought a lake on another device. How do I get it here?","acceptedAnswer":{"@type":"Answer","text":"Open Settings and tap Restore, or Restore purchases in the shop, signed in to the same Apple Account."}},
+{"@type":"Question","name":"Can I turn the sound off?","acceptedAnswer":{"@type":"Answer","text":"Yes: Settings, Sound. The game's own synthesised clacks and chimes mix with your music and stay quiet when your iPhone is on silent."}}]}]}
+</script>
 <style>
   @font-face { font-family: Figtree; src: url(assets/fonts/figtree_400.ttf) format("truetype"); font-weight: 400; font-display: swap; }
   @font-face { font-family: Figtree; src: url(assets/fonts/figtree_700.ttf) format("truetype"); font-weight: 700; font-display: swap; }
@@ -39,7 +60,9 @@
   header .wrap { display: flex; align-items: center; gap: 12px; }
   header img { width: 44px; height: 44px; border-radius: 10px; box-shadow: 0 3px 6px rgba(74, 51, 82, .25); }
   .brand { font: 600 26px/1 Outfit, Figtree, sans-serif; letter-spacing: -.01em; }
-  header nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+  header nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 0 18px; font-size: 15px; }
+  /* Text links keep their look but get a 44px-tall hit area (Apple HIG touch size). */
+  header nav a, footer a { display: inline-flex; align-items: center; min-height: 44px; }
   h1, h2, h3 { font-family: Outfit, Figtree, sans-serif; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; }
   .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 48px 0 32px; }
   .hero h1 { font-size: clamp(36px, 5.5vw, 58px); margin: 0 0 16px; }
@@ -80,14 +103,19 @@
   details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin: 0 0 10px; }
   summary { cursor: pointer; font-weight: 700; min-height: 28px; }
   details p { margin: 10px 0 0; color: var(--ink2); }
-  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 15px; color: var(--ink2); margin-top: 24px; }
-  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  footer { border-top: 1px solid var(--line); padding: 18px 0 30px; font-size: 15px; color: var(--ink2); margin-top: 24px; }
+  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; }
   footer a { color: var(--ink2); }
   :focus-visible { outline: 3px solid var(--pine); outline-offset: 3px; }
   @media (max-width: 820px) {
     .hero { grid-template-columns: 1fr; padding-top: 28px; }
     .features, ol.steps { grid-template-columns: 1fr; }
-    header nav { display: none; }
+    /* Phones: the same four links stay reachable as a row under the wordmark instead of hiding. */
+    header .wrap { flex-wrap: wrap; row-gap: 4px; }
+    header nav { margin-left: 0; width: 100%; gap: 0 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 </style>
 </head>
@@ -107,7 +135,7 @@
       <h1>Flick a stone. Watch the motion pass on.</h1>
       <p class="lead">Painted stones slide across a frozen lake at dusk. Hit a line and your stone stops dead while the
         last one slides on. Bring every stone home to its own ring.</p>
-      <span class="badge" aria-label="Coming soon to the App Store">Coming soon to the App Store</span>
+      <span class="badge">Coming soon to the App Store</span>
       <p class="note">For iPhone. Plays offline. No ads, no timers, no accounts.</p>
     </div>
     <img class="phone" src="assets/game.webp" width="780" height="1688"
@@ -124,8 +152,8 @@
       </div>
       <div class="card">
         <h3>100 sheets, five lakes</h3>
-        <p>Every sheet is solved by the game's own solver, so its par is the true best, and every sheet needs a knock
-          to clear it in par.</p>
+        <p>Every sheet, or level, is solved by the game's own solver, so its par is the true best, and every sheet
+          needs a knock to clear it in par.</p>
       </div>
       <div class="card">
         <h3>Calm by design</h3>
@@ -137,7 +165,7 @@
 
   <section id="how" aria-labelledby="how-h">
     <h2 id="how-h">How it plays</h2>
-    <ol class="steps">
+    <ol class="steps" role="list">
       <li><strong>Flick a stone</strong> up, down, left or right.</li>
       <li><strong>It slides</strong> until a post, the shore or a backed-up line stops it.</li>
       <li><strong>A knock passes on:</strong> the stone you hit sends the last stone of its line sliding.</li>
@@ -147,7 +175,7 @@
 
   <section aria-labelledby="look">
     <h2 id="look">On the ice</h2>
-    <div class="shots" tabindex="0" aria-label="Screenshots, scroll sideways">
+    <div class="shots" role="region" tabindex="0" aria-label="Screenshots, scroll sideways">
       <figure><img src="assets/home.webp" width="240" height="519" loading="lazy" alt="The shore: the five lakes as stops along a snowbank, and the next sheet seen through an ice hole"><figcaption>The shore and its five lakes</figcaption></figure>
       <figure><img src="assets/game.webp" width="240" height="519" loading="lazy" alt="A sheet in play with the wake of the last flick on the ice"><figcaption>A sheet in play</figcaption></figure>
       <figure><img src="assets/won.webp" width="240" height="519" loading="lazy" alt="A cleared sheet: every stone on its ring, a wooden sign reading Clean sheet"><figcaption>A clean sheet</figcaption></figure>
@@ -167,8 +195,9 @@
         <tr><td>Lantern Mere</td><td>Everything at once, on the widest ice</td><td>$1.99</td></tr>
       </tbody>
     </table>
-    <p class="plank">The first 40 sheets are free. The far lakes open in order; or get all three for $3.99 before buying
-      any of them. Bought once, yours on every device with your Apple Account. US prices; your store shows yours.</p>
+    <p class="plank">The first 40 sheets are free. The far lakes open in order; before you buy any of them, you can get
+      all three for $3.99. Bought once, yours on every device with your Apple Account. US prices; your store shows
+      yours.</p>
   </section>
 
   <section id="faq" aria-labelledby="faq-h">
