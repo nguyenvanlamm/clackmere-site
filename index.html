@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clackmere: a calm stone-sliding puzzle for iPhone</title>
+<meta name="description" content="Clackmere: a calm iPhone puzzle on a frozen lake. Flick painted stones; a knock passes the motion on. 100 sheets, no ads, no timers, plays offline.">
+<link rel="canonical" href="https://nguyenvanlamm.github.io/clackmere-site/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F4C7AC">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clackmere">
+<meta property="og:title" content="Clackmere: flick a stone, watch the motion pass on">
+<meta property="og:description" content="Painted stones slide on a frozen lake at dusk. A knock stops your stone and sends the last of the line sliding on. 100 sheets for iPhone.">
+<meta property="og:url" content="https://nguyenvanlamm.github.io/clackmere-site/">
+<meta property="og:image" content="https://nguyenvanlamm.github.io/clackmere-site/assets/game.webp">
+<style>
+  @font-face { font-family: Figtree; src: url(assets/fonts/figtree_400.ttf) format("truetype"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: Figtree; src: url(assets/fonts/figtree_700.ttf) format("truetype"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: Outfit; src: url(assets/fonts/outfit_600.ttf) format("truetype"); font-weight: 600; font-display: swap; }
+  :root {
+    --dusk: #F4C7AC; --rose: #EED8DA; --lilac: #E2D4E5; --ice: #D6C6DB;
+    --ink: #3A2840; --ink2: #5E4B66; --pine: #2E7356; --pine-deep: #1B4A36;
+    --wood: #E6C69E; --wood-edge: #A97C52; --line: rgba(58, 40, 64, .14); --card: rgba(251, 247, 250, .72);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); font: 17px/1.6 Figtree, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, var(--dusk) 0, var(--rose) 520px, var(--lilac) 1400px, var(--ice) 100%);
+    background-color: var(--lilac);
+  }
+  a { color: var(--pine-deep); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  .skip { position: absolute; left: -9999px; } .skip:focus { left: 16px; top: 16px; background: #fff; padding: 8px 12px; }
+  header { padding: 24px 0 0; }
+  header .wrap { display: flex; align-items: center; gap: 12px; }
+  header img { width: 44px; height: 44px; border-radius: 10px; box-shadow: 0 3px 6px rgba(74, 51, 82, .25); }
+  .brand { font: 600 26px/1 Outfit, Figtree, sans-serif; letter-spacing: -.01em; }
+  header nav { margin-left: auto; display: flex; gap: 18px; font-size: 15px; }
+  h1, h2, h3 { font-family: Outfit, Figtree, sans-serif; font-weight: 600; line-height: 1.15; letter-spacing: -.01em; }
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 48px 0 32px; }
+  .hero h1 { font-size: clamp(36px, 5.5vw, 58px); margin: 0 0 16px; }
+  .hero p.lead { font-size: 20px; color: var(--ink2); margin: 0 0 24px; max-width: 34em; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px;
+    background: var(--ink); color: #FBF7FA; font-weight: 700; text-decoration: none; box-shadow: 0 4px 0 #22172A;
+  }
+  .note { font-size: 15px; color: var(--ink2); margin-top: 12px; }
+  .phone {
+    width: 100%; max-width: 330px; height: auto; justify-self: center; border-radius: 34px; border: 8px solid #2A1F30;
+    box-shadow: 0 18px 36px rgba(74, 51, 82, .28); display: block;
+  }
+  section { padding: 40px 0; }
+  section h2 { font-size: clamp(28px, 4vw, 38px); margin: 0 0 20px; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .card h3 { font-size: 22px; margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--ink2); }
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  ol.steps li { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  ol.steps li::before {
+    content: counter(s); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--pine); color: #FBF7FA; font-weight: 700; margin-bottom: 10px;
+  }
+  .shots { display: flex; gap: 18px; overflow-x: auto; padding: 4px 4px 16px; scroll-snap-type: x mandatory; }
+  .shots figure { margin: 0; flex: 0 0 240px; scroll-snap-align: start; }
+  .shots img { width: 240px; height: auto; border-radius: 22px; border: 6px solid #2A1F30; display: block; }
+  .shots figcaption { font-size: 15px; color: var(--ink2); margin-top: 8px; }
+  .lakes { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 18px; overflow: hidden; }
+  .lakes th, .lakes td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .lakes th { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink2); }
+  .lakes tr:last-child td { border-bottom: 0; }
+  .plank {
+    background: linear-gradient(180deg, var(--wood), #D6B083); border: 1px solid var(--wood-edge); border-radius: 10px;
+    padding: 14px 18px; margin-top: 16px; font-weight: 700;
+  }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin: 0 0 10px; }
+  summary { cursor: pointer; font-weight: 700; min-height: 28px; }
+  details p { margin: 10px 0 0; color: var(--ink2); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 15px; color: var(--ink2); margin-top: 24px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  footer a { color: var(--ink2); }
+  :focus-visible { outline: 3px solid var(--pine); outline-offset: 3px; }
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; padding-top: 28px; }
+    .features, ol.steps { grid-template-columns: 1fr; }
+    header nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap">
+    <img src="assets/icon.webp" alt="" width="44" height="44">
+    <span class="brand">Clackmere</span>
+    <nav aria-label="Pages"><a href="#how">How it plays</a><a href="#lakes">Lakes</a><a href="#faq">FAQ</a><a href="support.html">Support</a></nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Flick a stone. Watch the motion pass on.</h1>
+      <p class="lead">Painted stones slide across a frozen lake at dusk. Hit a line and your stone stops dead while the
+        last one slides on. Bring every stone home to its own ring.</p>
+      <span class="badge" aria-label="Coming soon to the App Store">Coming soon to the App Store</span>
+      <p class="note">For iPhone. Plays offline. No ads, no timers, no accounts.</p>
+    </div>
+    <img class="phone" src="assets/game.webp" width="780" height="1688"
+      alt="A sheet on Mirror Pond: painted stones on lilac ice inside a snowbank, a par disc at the top right, Undo and Scout pebbles below">
+  </div>
+
+  <section aria-labelledby="why">
+    <h2 id="why">A puzzle about the stone you hit</h2>
+    <div class="features">
+      <div class="card">
+        <h3>One flick, a chain of moves</h3>
+        <p>A stone that runs into a line stops, and the stone at the far end slides on. Plan the knock, not just the
+          flick: the right one moves two stones at once.</p>
+      </div>
+      <div class="card">
+        <h3>100 sheets, five lakes</h3>
+        <p>Every sheet is solved by the game's own solver, so its par is the true best, and every sheet needs a knock
+          to clear it in par.</p>
+      </div>
+      <div class="card">
+        <h3>Calm by design</h3>
+        <p>No timers and no lives. Undo and Restart are free and unlimited. Sessions of a few minutes, a sheet at a
+          time, wherever you stop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" aria-labelledby="how-h">
+    <h2 id="how-h">How it plays</h2>
+    <ol class="steps">
+      <li><strong>Flick a stone</strong> up, down, left or right.</li>
+      <li><strong>It slides</strong> until a post, the shore or a backed-up line stops it.</li>
+      <li><strong>A knock passes on:</strong> the stone you hit sends the last stone of its line sliding.</li>
+      <li><strong>Fill every ring</strong> with its colour. Make par for three stars.</li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="look">
+    <h2 id="look">On the ice</h2>
+    <div class="shots" tabindex="0" aria-label="Screenshots, scroll sideways">
+      <figure><img src="assets/home.webp" width="240" height="519" loading="lazy" alt="The shore: the five lakes as stops along a snowbank, and the next sheet seen through an ice hole"><figcaption>The shore and its five lakes</figcaption></figure>
+      <figure><img src="assets/game.webp" width="240" height="519" loading="lazy" alt="A sheet in play with the wake of the last flick on the ice"><figcaption>A sheet in play</figcaption></figure>
+      <figure><img src="assets/won.webp" width="240" height="519" loading="lazy" alt="A cleared sheet: every stone on its ring, a wooden sign reading Clean sheet"><figcaption>A clean sheet</figcaption></figure>
+      <figure><img src="assets/shop.webp" width="240" height="519" loading="lazy" alt="The far lakes for sale, each with its price, and All Three Lakes"><figcaption>The far lakes</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="lakes" aria-labelledby="lakes-h">
+    <h2 id="lakes-h">Five lakes</h2>
+    <table class="lakes">
+      <thead><tr><th scope="col">Lake</th><th scope="col">Adds</th><th scope="col">Price</th></tr></thead>
+      <tbody>
+        <tr><td>Mirror Pond</td><td>Painted stones and the knock</td><td>Free</td></tr>
+        <tr><td>Fishing Holes</td><td>Holes in the ice: a stone that sinks ends the sheet</td><td>Free</td></tr>
+        <tr><td>Granite Bay</td><td>Anchor stones: they knock, but hold when hit</td><td>$1.99</td></tr>
+        <tr><td>Hoarfrost Reach</td><td>Frost stones: they freeze holes shut</td><td>$1.99</td></tr>
+        <tr><td>Lantern Mere</td><td>Everything at once, on the widest ice</td><td>$1.99</td></tr>
+      </tbody>
+    </table>
+    <p class="plank">The first 40 sheets are free. The far lakes open in order; or get all three for $3.99 before buying
+      any of them. Bought once, yours on every device with your Apple Account. US prices; your store shows yours.</p>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Questions</h2>
+    <details><summary>Does it need a connection?</summary><p>No. Clackmere plays fully offline; the store is only asked when you open the shop or restore a purchase.</p></details>
+    <details><summary>Are there ads, or anything that tracks me?</summary><p>No ads, no analytics, no accounts. Your progress stays on your iPhone. See the <a href="privacy.html">privacy policy</a>.</p></details>
+    <details><summary>What if I get stuck?</summary><p>Undo and Restart are free. Scout shows the next flick of a best line, or how many flicks to undo. You start with three Scouts and earn more on sheets 5, 10, 15 and 20 of each lake; they are never sold. Using one caps that sheet at two stars.</p></details>
+    <details><summary>I bought a lake on another device. How do I get it here?</summary><p>Open Settings and tap Restore, or Restore purchases in the shop, signed in to the same Apple Account.</p></details>
+    <details><summary>Can I turn the sound off?</summary><p>Yes: Settings, Sound. The game's own synthesised clacks and chimes mix with your music and stay quiet when your iPhone is on silent.</p></details>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <span>© 2026 Luong Nguyen</span>
+    <span>Typefaces: Figtree and Outfit (SIL Open Font License)</span>
+  </div>
+</footer>
+</body>
+</html>
