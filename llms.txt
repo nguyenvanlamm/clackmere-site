@@ -1,0 +1,15 @@
+# Clackmere
+
+> Clackmere is a calm, offline stone-sliding puzzle for iPhone. Painted stones slide across a frozen lake at dusk; a stone that runs into a line of stones that can move stops dead, and the last stone of that line slides on in its place. Bring every painted stone home to a ring of its colour. Coming soon to iPhone on the App Store.
+
+- Rules: drag a stone up, down, left or right to flick it. It slides until a post, the shore or a line of stones that cannot move stops it. Put every painted stone on a ring of its colour; clear the sheet within par for three stars. Every sheet is solved by the game's own solver, so its par is the true best, and every sheet needs a knock to clear it in par.
+- Content: 100 sheets on five lakes. The first 40 sheets are free: Mirror Pond (painted stones and the knock) and Fishing Holes (holes in the ice: a stone that sinks ends the sheet). Granite Bay (anchor stones that hold when hit), Hoarfrost Reach (frost stones that freeze holes shut) and Lantern Mere (everything at once, on the widest ice) are optional in-app purchases that open in order, or together as All Three Lakes. The landing page lists the US prices; the App Store shows local prices.
+- Helps: Undo and Restart are free and unlimited. Scout shows the next flick of a best line, or how many flicks to undo; you start with three and earn more on sheets 5, 10, 15 and 20 of each lake. Scouts are never sold, and using one caps that sheet at two stars.
+- No timers, no lives, no ads, no account, no analytics or tracking. Progress stays on the device and the game plays offline; only the shop and Restore talk to the App Store. English only.
+- Made by Luong Nguyen. Contact: lamnv260398@gmail.com.
+
+## Pages
+
+- [Home](https://nguyenvanlamm.github.io/clackmere-site/): what the game is, how it plays, the five lakes, prices and FAQ
+- [Support](https://nguyenvanlamm.github.io/clackmere-site/support.html): contact, how to play, Scout hints, purchases and restoring, progress
+- [Privacy Policy](https://nguyenvanlamm.github.io/clackmere-site/privacy.html): what the game stores on the device and what it never collects
